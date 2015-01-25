@@ -46,7 +46,7 @@ names(data1) <- gsub("\\.$", "", names(data1))
 # use dplyr and group_by function to group data by Subject and Activity and calculate the average
 library(dplyr)
 data2 <- group_by(data1, Subject, Activity)
-tidydata <- summarise(data2, "Average" = mean(tBodyAcc.mean.X:angle.Z.gravityMean))
+tidydata <- summarise_each(data2, funs(mean), tBodyAcc.mean.X:angle.Z.gravityMean)
 write.table(tidydata, "./tidydata.txt", row.name=FALSE, quote=FALSE)
 
 
